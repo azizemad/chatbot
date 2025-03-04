@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شات بوت تيليجرام</title>
+    <script>
+        async function sendMessage() {
+            let userInput = document.getElementById("userInput").value;
+            if (!userInput.trim()) return;
+
+            let response = await fetch("/send", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userInput })
+            });
+
+            let result = await response.json();
+            alert(result.status || result.error);
+        }
+    </script>
+</head>
+<body>
+    <h1>شات بوت تيليجرام</h1>
+    <input type="text" id="userInput" placeholder="اكتب رسالتك..." />
+    <button onclick="sendMessage()">إرسال</button>
+</body>
+</html>
